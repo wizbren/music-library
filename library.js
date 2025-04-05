@@ -168,8 +168,8 @@ const addPlaylist = function(name) {
     tracks: []
   };
 };
-library.addPlaylist("Brendan's Confusion: Greatest Hits");
-console.log(library.playlists);
+//library.addPlaylist("Brendan's Confusion: Greatest Hits");
+//console.log(library.playlists);
 
 // STRETCH:
 // given a query string string, prints a list of tracks
