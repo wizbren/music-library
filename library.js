@@ -31,17 +31,28 @@ const library = {
 // p01: Coding Music - 2 tracks
 // p02: Other Playlist - 1 tracks
 const printPlaylists = function() {
+  let playlistIDs = Object.keys(library.playlists);
 
-}
-
+  for (let i = 0; i < playlistIDs.length; i++) {
+    let playlistID = playlistIDs[i];
+    let playlist = library.playlists[playlistID];
+    console.log(`${playlistID}: ${playlist.name} - ${playlist.tracks.length}`);
+  }
+};
+//printPlaylists();
 
 // prints a list of all tracks, using the following format:
 // t01: Code Monkey by Jonathan Coulton (Thing a Week Three)
 // t02: Model View Controller by James Dempsey (WWDC 2003)
 // t03: Four Thirty-Three by John Cage (Woodstock 1952)
 const printTracks = function() {
+  for (let trackID in library.tracks) {
+    let track = library.tracks[trackID];
 
-}
+    console.log(`${trackID}: ${track.name} by ${track.artist} (${track.album})`);
+  }
+};
+//printTracks();
 
 
 // prints a list of tracks for a given playlist, using the following format:
@@ -49,34 +60,63 @@ const printTracks = function() {
 // t01: Code Monkey by Jonathan Coulton (Thing a Week Three)
 // t02: Model View Controller by James Dempsey (WWDC 2003)
 const printPlaylist = function(playlistId) {
+  let playlist = library.playlists[playlistId];
+  let playlistName = playlist.name;
+  let howManyTracks = playlist.tracks.length;
+  console.log(`${playlistId}: ${playlistName} - ${howManyTracks} tracks`);
 
-}
-
+  for (let trackId of playlist.tracks) {
+    let track = library.tracks[trackId];
+    console.log(`${trackId}: ${track.name} by ${track.artist} (${track.album})`);
+  }
+};
+//printPlaylist("p01");
+//printPlaylist("p02");
 
 // adds an existing track to an existing playlist
 const addTrackToPlaylist = function(trackId, playlistId) {
+  let playlist = library.playlists[playlistId];
 
-}
+  if (!playlist.tracks.includes(trackId)) {
+    playlist.tracks.push(trackId);
+    console.log(`Added ${trackId} to playlist ${playlistId}`);
+  }
+};
+//addTrackToPlaylist("t03", "p01");
 
 
 // generates a unique id
 // (already implemented: use this for addTrack and addPlaylist)
 const generateUid = function() {
   return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-}
+};
 
 
 // adds a track to the library
 const addTrack = function(name, artist, album) {
-
-}
+  const newTrack = generateUid();
+  library.tracks[newTrack] = {
+    id: newTrack,
+    name: name,
+    artist: artist,
+    album: album
+  };
+};
+//addTrack("What am I doing", "Brendan", "Maybe this isn't for me");
+//console.log(library.tracks);
 
 
 // adds a playlist to the library
 const addPlaylist = function(name) {
-
-}
-
+  const newPlaylist = generateUid();
+  library.playlists[newPlaylist] = {
+    id: newPlaylist,
+    name: name,
+    tracks: []
+  };
+};
+//addPlaylist("Brendan's Confusion: Greatest Hits");
+//console.log(library.playlists);
 
 // STRETCH:
 // given a query string string, prints a list of tracks
